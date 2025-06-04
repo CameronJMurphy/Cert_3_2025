@@ -1,6 +1,8 @@
 using System;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,7 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
         float x_mouse_axis = Input.GetAxisRaw("Mouse X");
         transform.Rotate(Vector3.up, x_mouse_axis * Time.deltaTime * rotationSpeed);
-
+        
+        float uppies = Input.GetAxisRaw("Bilbo");
+        Vector3 upMove = Vector3.up * uppies * speed;
+        controller.Move(upMove * Time.deltaTime); 
+        
+        
+        
         if (Input.GetKey(KeyCode.Space))
         {
             for (int i = 0; i < 10000; i++)
